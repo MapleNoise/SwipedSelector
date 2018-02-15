@@ -62,8 +62,13 @@ public class Cars {
 
 ### Ajouter les données dans les Cards
 
-La méthode `.setItemData(List<T> data, int resource, CardViewHolder typeOfViewHolder)` ajoute les données d'une liste dans des `ViewHolder` .
-Ici nous avons une liste de `Cars`  (`MainActivity.java`) :
+La méthode `.setItemData()` ajoute les données d'une liste dans des `ViewHolder` .
+
+Elle prend en paramètre :
+* Une liste d'objet
+* Le layout des cards qui seront swiped
+* Une initalisation de votre `ViewHolder` custom
+
 ```
 meetingCardView.setItemData(createCars(), R.layout.item_cars_card, new CarsViewHolder(getBaseContext()));
 ```
@@ -86,7 +91,42 @@ private List<Cars> createCars() {
 }
 ```
 
-Il faudra créer les layout des cards qui seront swipeables (`layout/item_cars_card.xml`) :
+Le `ViewHolder` custom devra __OBLIGATOIREMENT__ être `extends` par `CardViewHolder` (`CarsViewHolder.java`):
+```
+public class CarsViewHolder extends CardViewHolder {
+
+    public TextView model;
+    public TextView brand;
+    public ImageView image;
+    private Context ctx;
+
+    public CarsViewHolder(Context ctx){
+        this.ctx = ctx;
+    }
+
+    @Override
+    public void setView(View view) {
+        this.brand = (TextView) view.findViewById(R.id.textViewBrand);
+        this.model = (TextView) view.findViewById(R.id.textViewModel);
+        this.image = (ImageView) view.findViewById(R.id.imageViewCard);
+    }
+
+    @Override
+    public void bindView(Object object) {
+        Cars item = (Cars)object;
+        model.setText(item.model);
+        brand.setText(item.brand);
+        Glide.with(ctx).load(item.url).into(image);
+    }
+}
+```
+On remarque les 2 methodes surchargées avec `setView()` qui permet d'initialiser chaque élément graphique de la card et `bindView()` qui va remplir les données de la card.
+__Parsing à faire obligatoirement__ : `Cars item = (Cars)object;`
+
+*J'utilise la librairie Glide pour télécharger les images via une url*
+
+
+Pour terminer, on crée les layout des cards qui seront swipeables (`layout/item_cars_card.xml`) :
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
@@ -136,80 +176,4 @@ Il faudra créer les layout des cards qui seront swipeables (`layout/item_cars_c
 
 </android.support.v7.widget.CardView>
 ```
-
-
-
-
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
 
