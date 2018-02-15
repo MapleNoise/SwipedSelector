@@ -7,6 +7,7 @@ public class Cars {
     public String url;
 
     public Cars(int id, String model, String brand, String url) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.url = url;

@@ -52,6 +52,7 @@ public class Cars {
     public String url;
 
     public Cars(int id, String model, String brand, String url) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.url = url;
@@ -121,12 +122,13 @@ public class CarsViewHolder extends CardViewHolder {
 }
 ```
 On remarque les 2 methodes surchargées avec `setView()` qui permet d'initialiser chaque élément graphique de la card et `bindView()` qui va remplir les données de la card.
+
 __Parsing à faire obligatoirement__ : `Cars item = (Cars)object;`
 
 *J'utilise la librairie Glide pour télécharger les images via une url*
 
 
-Pour terminer, on crée les layout des cards qui seront swipeables (`layout/item_cars_card.xml`) :
+Pour terminer, on crée le layout des cards qui seront swipeables (`layout/item_cars_card.xml`) :
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
@@ -175,5 +177,20 @@ Pour terminer, on crée les layout des cards qui seront swipeables (`layout/item
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
+```
+
+### Ajouter un Top(Header)View au dessus des Cards
+Dans l'Activity parent il faudra créer une variable (`MainActivity.java`):
+```
+public FragmentManager _fragManager;
+```
+
+et l'initialiser dans le `OnCreate` de l'Activity (`MainActivity.java`) :
+```
+ _fragManager = getSupportFragmentManager();
+```
+Il suffit ensuite d'ajouter le fragment à l'aide du FragmentManager :
+```
+ meetingCardView.setTopView(profileFragment, _fragManager);
 ```
 
