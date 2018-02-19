@@ -179,6 +179,17 @@ Pour terminer, on crée le layout des cards qui seront swipeables (`layout/item_
 </android.support.v7.widget.CardView>
 ```
 
+### Listener sur le swipe d'une Card
+```
+meetingCardView.setSwipedListener(new MeetingCardSwipeListener() {
+    @Override
+    public void OnObjectSwiped(Object obj) {
+        Cars item = (Cars)obj;
+        Toast.makeText(MainActivity.this, item.brand +" - "+item.model+" is Swiped", Toast.LENGTH_LONG).show();
+    }
+});
+```
+
 ### Ajouter un Top(Header)View au dessus des Cards
 Dans l'Activity parent il faudra créer une variable (`MainActivity.java`):
 ```
