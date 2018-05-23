@@ -11,6 +11,7 @@ public enum SwipeDirection {
     public static final List<SwipeDirection> HORIZONTAL = Arrays.asList(SwipeDirection.Left, SwipeDirection.Right);
     public static final List<SwipeDirection> VERTICAL = Arrays.asList(SwipeDirection.Top, SwipeDirection.Bottom);
     public static final List<SwipeDirection> VERTICAL_NO_BOTTOM = Arrays.asList(SwipeDirection.Top);
+    public static final List<SwipeDirection> VERTICAL_NO_TOP = Arrays.asList(SwipeDirection.Bottom);
 
     public static List<SwipeDirection> from(int value) {
         switch (value) {
@@ -24,6 +25,8 @@ public enum SwipeDirection {
                 return VERTICAL;
             case 4:
                 return VERTICAL_NO_BOTTOM;
+            case 5:
+                return VERTICAL_NO_TOP;
             default:
                 return FREEDOM;
         }

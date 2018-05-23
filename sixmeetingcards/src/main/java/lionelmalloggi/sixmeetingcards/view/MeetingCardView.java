@@ -98,16 +98,18 @@ public class MeetingCardView<T> extends FrameLayout {
         int height = display.getHeight();
         int width = display.getWidth();
 
-        cardTopLeft.setPadding(0, height/3, 2*width/3, height/3);
-        cardTopCenter.setPadding(width/3, height/3, width/3, height/3);
-        cardTopRight.setPadding(2*width/3, height/3, 0, height/3);
-        cardBottomLeft.setPadding(0, 2*height/3, 2*width/3, 0);
-        cardBottomCenter.setPadding(width/3, 2*height/3, width/3, 0);
-        cardBottomRight.setPadding(2*width/3, 2*height/3, 0, 0);
-
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)flContainer.getLayoutParams();
-        params.setMargins(0, 0, 0, 2*height/3);
+        params.setMargins(0, 2*height/3, 0, 0);
         flContainer.setLayoutParams(params);
+
+        cardTopLeft.setPadding(0, 0, 2*width/3, 2*height/3);
+        cardTopCenter.setPadding(width/3, 0, width/3, 2*height/3);
+        cardTopRight.setPadding(2*width/3, 0, 0, 2*height/3);
+        cardBottomLeft.setPadding(0, height/3, 2*width/3, height/3);
+        cardBottomCenter.setPadding(width/3, height/3, width/3, height/3);
+        cardBottomRight.setPadding(2*width/3, height/3, 0, height/3);
+
+
     }
 
     public void setTopView(Fragment fragment, FragmentManager manager){
@@ -215,6 +217,7 @@ public class MeetingCardView<T> extends FrameLayout {
             public void onCardDragging(float percentX, float percentY) {
                 System.out.println("percentX: "+percentX);
                 System.out.println("percentY: "+percentY);
+                listener.ObjectIsSwipping((T) adapterCardTopLeft.getItem(0), percentX, percentY);
             }
 
             @Override
@@ -244,6 +247,7 @@ public class MeetingCardView<T> extends FrameLayout {
             public void onCardDragging(float percentX, float percentY) {
                 System.out.println("percentX: "+percentX);
                 System.out.println("percentY: "+percentY);
+                listener.ObjectIsSwipping((T) adapterCardTopCenter.getItem(0), percentX, percentY);
             }
 
             @Override
@@ -273,6 +277,7 @@ public class MeetingCardView<T> extends FrameLayout {
             public void onCardDragging(float percentX, float percentY) {
                 System.out.println("percentX: "+percentX);
                 System.out.println("percentY: "+percentY);
+                listener.ObjectIsSwipping((T) adapterCardTopRight.getItem(0), percentX, percentY);
             }
 
             @Override
@@ -302,6 +307,7 @@ public class MeetingCardView<T> extends FrameLayout {
             public void onCardDragging(float percentX, float percentY) {
                 System.out.println("percentX: "+percentX);
                 System.out.println("percentY: "+percentY);
+                listener.ObjectIsSwipping((T) adapterCardBottomLeft.getItem(0), percentX, percentY);
             }
 
             @Override
@@ -331,6 +337,7 @@ public class MeetingCardView<T> extends FrameLayout {
             public void onCardDragging(float percentX, float percentY) {
                 System.out.println("percentX: "+percentX);
                 System.out.println("percentY: "+percentY);
+                listener.ObjectIsSwipping((T) adapterCardBottomCenter.getItem(0), percentX, percentY);
             }
 
             @Override
@@ -360,6 +367,7 @@ public class MeetingCardView<T> extends FrameLayout {
             public void onCardDragging(float percentX, float percentY) {
                 System.out.println("percentX: "+percentX);
                 System.out.println("percentY: "+percentY);
+                listener.ObjectIsSwipping((T) adapterCardBottomRight.getItem(0), percentX, percentY);
             }
 
             @Override

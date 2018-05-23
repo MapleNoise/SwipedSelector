@@ -6,4 +6,5 @@ package lionelmalloggi.sixmeetingcards.view;
 
 public interface MeetingCardSwipeListener<T> {
     void OnObjectSwiped(T obj);
+    void ObjectIsSwipping(T obj, float x, float y);
 }

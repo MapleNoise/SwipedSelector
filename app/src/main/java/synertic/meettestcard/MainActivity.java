@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
                 Cars item = (Cars)obj;
                 Toast.makeText(MainActivity.this, item.brand +" - "+item.model+" is Swiped", Toast.LENGTH_LONG).show();
             }
+
+            @Override
+            public void ObjectIsSwipping(Object obj, float x, float y) {
+
+            }
         });
 
         TopFragment profileFragment = TopFragment.newInstance();
